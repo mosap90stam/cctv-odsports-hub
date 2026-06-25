@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>od体育 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: #f0f2f5;
+            color: #2c3e4f;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        /* hero 卡片 */
+        .hero-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e6eaef;
+            padding: 2.8rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, #dce5f0 0%, transparent 70%);
+            opacity: 0.4;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-card h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.8rem;
+            color: #1f2a36;
+        }
+        .hero-card p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto 1.2rem;
+            color: #4a5b6b;
+        }
+        .hero-card .tagline {
+            display: inline-block;
+            background: #eef2f7;
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #3e5e7a;
+            border: 1px solid #d8dfe8;
+        }
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            margin-bottom: 2.2rem;
+        }
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 960px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.01);
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+        .info-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+            transform: translateY(-2px);
+        }
+        .info-card .card-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1b2937;
+        }
+        .info-card p {
+            font-size: 0.95rem;
+            color: #3f5468;
+            margin-bottom: 0.3rem;
+        }
+        .info-card .meta-tag {
+            display: inline-block;
+            background: #eef3f9;
+            border-radius: 40px;
+            padding: 0.15rem 0.8rem;
+            font-size: 0.75rem;
+            color: #3b5a7c;
+            margin-top: 0.6rem;
+            border: 1px solid #d2dce9;
+        }
+        /* 双列布局（受众 + 链接段落） */
+        .row-duo {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 720px) {
+            .row-duo {
+                grid-template-columns: 1fr 1.2fr;
+            }
+        }
+        .segment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.6rem 1.6rem 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .segment-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1b2937;
+            border-left: 4px solid #b3c7db;
+            padding-left: 0.7rem;
+        }
+        .segment-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0.8rem;
+        }
+        .segment-card li {
+            padding: 0.3rem 0 0.3rem 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: #2c4255;
+        }
+        .segment-card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0.2rem;
+            color: #6f8aa8;
+        }
+        .natural-link-paragraph {
+            background: white;
+            border-radius: 20px;
+            padding: 1.6rem 1.6rem 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .natural-link-paragraph p {
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            color: #2b4053;
+        }
+        .natural-link-paragraph a {
+            color: #1f5780;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #c6d6e8;
+            transition: border-color 0.2s;
+        }
+        .natural-link-paragraph a:hover {
+            border-bottom-color: #1f5780;
+        }
+        /* faq 摘要 */
+        .faq-mini {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 2rem 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            margin-bottom: 1.8rem;
+        }
+        .faq-mini h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1b2937;
+        }
+        .faq-item {
+            margin-bottom: 0.9rem;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1f3a50;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #405a70;
+            margin-left: 0.8rem;
+        }
+        .footnote {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c829b;
+            border-top: 1px solid #dae2ec;
+            padding-top: 1rem;
+            margin-top: 0.4rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #dce3ed;
+            margin: 1.2rem 0;
+        }
+        .badge-light {
+            background: #eef3f9;
+            display: inline-block;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #3b5f80;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+
+    <!-- hero 卡片 -->
+    <section class="hero-card">
+        <h1>od体育 · 用途速览</h1>
+        <p>一个聚焦体育数据整合与赛事信息展示的平台，帮助访问者快速识别其内容方向与使用场景。</p>
+        <span class="tagline">信息卡片 · 分类导览</span>
+    </section>
+
+    <!-- 用途卡片 三列 -->
+    <div class="card-grid">
+        <div class="info-card">
+            <span class="card-icon">📊</span>
+            <h3>赛事数据参考</h3>
+            <p>汇集常见体育项目的赛程、比分、统计摘要，适合赛前赛后查阅基础数据。</p>
+            <span class="meta-tag">日常浏览</span>
+        </div>
+        <div class="info-card">
+            <span class="card-icon">🏟️</span>
+            <h3>多项目覆盖</h3>
+            <p>足球、篮球、网球等主流运动均有收录，分类清晰，便于快速切换关注项目。</p>
+            <span class="meta-tag">信息聚合</span>
+        </div>
+        <div class="info-card">
+            <span class="card-icon">📋</span>
+            <h3>列表式浏览</h3>
+            <p>以简洁卡片或列表展示当日重点赛事，减少冗余信息，聚焦核心动态。</p>
+            <span class="meta-tag">轻量体验</span>
+        </div>
+    </div>
+
+    <!-- 适合人群 + 自然链接段落（双列） -->
+    <div class="row-duo">
+        <div class="segment-card">
+            <h3>适合哪些人</h3>
+            <ul>
+                <li>日常关注体育赛事的爱好者</li>
+                <li>需要快速检索比赛数据的轻度用户</li>
+                <li>希望了解赛事日程的体育迷</li>
+                <li>浏览信息而非深度分析的一般访客</li>
+            </ul>
+            <div style="margin-top: 0.5rem; font-size:0.88rem; color:#4a6380;">
+                <span class="badge-light">信息查阅</span> 
+                <span class="badge-light" style="margin-left:0.5rem;">赛程检索</span>
+            </div>
+        </div>
+        <div class="natural-link-paragraph">
+            <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem; color:#1b2937;">从用途认识平台</h3>
+            <p>如果你正在寻找一个集中查看体育数据与赛程的线上入口，<a href="https://cctv-odsports.com">od体育</a> 提供了一种以信息卡片和列表为主的浏览方式，其内容编排倾向于直观与分类，适合快速定位赛事概况。</p>
+            <p>该平台并未强调复杂交互或实时直播，而是将重点置于可反复查阅的静态数据模块，这对于偏好简洁信息架构的用户而言，不失为一种轻量选择。</p>
+            <p style="margin-top:0.8rem; font-size:0.9rem; color:#506f8b;">—— 信息导向，结构透明。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <section class="faq-mini">
+        <h3>常见疑问摘要</h3>
+        <div class="faq-item">
+            <strong>该平台主要提供什么？</strong>
+            <p>以赛事数据、赛程信息和分类浏览为核心，偏向信息展示而非流媒体或互动社区。</p>
+        </div>
+        <div class="faq-item">
+            <strong>内容覆盖哪些运动？</strong>
+            <p>包括但不限于足球、篮球、网球等，具体项目可通过导航分类查看。</p>
+        </div>
+        <div class="faq-item">
+            <strong>适合深度数据分析吗？</strong>
+            <p>更适合快速查阅与参考，若需深度统计或历史数据，建议结合专业数据库使用。</p>
+        </div>
+        <div style="margin-top:0.6rem; border-left:3px solid #cbdae8; padding-left:1rem; font-size:0.9rem; color:#315577;">
+            💡 建议先浏览各分类，了解信息粒度是否符合个人需求。
+        </div>
+    </section>
+
+    <!-- 额外提示区 -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; justify-content: center;">
+        <span style="background:#eef3f9; border-radius: 30px; padding:0.2rem 1rem; border:1px solid #d8e2ef; font-size:0.85rem;">📌 基于信息卡片结构</span>
+        <span style="background:#eef3f9; border-radius: 30px; padding:0.2rem 1rem; border:1px solid #d8e2ef; font-size:0.85rem;">🔍 非实时直播平台</span>
+        <span style="background:#eef3f9; border-radius: 30px; padding:0.2rem 1rem; border:1px solid #d8e2ef; font-size:0.85rem;">📁 数据模块偏静态</span>
+    </div>
+
+    <hr>
+    <div class="footnote">
+        本介绍页仅用于说明网站用途方向，所有描述基于公开信息整理。内容未经平台官方确认。
+    </div>
+
+</div>
+</body>
+</html>
